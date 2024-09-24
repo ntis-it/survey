@@ -11,4 +11,8 @@ class SurveyUserInputLine(models.Model):
             return self.suggested_answer_id.display_name
         if self.answer_type == "date":
             return self.value_date.isoformat()
+        if self.answer_type == "binary":
+            return 'Uploaded File'
+        if self.answer_type == "multi_binary":
+            return 'Uploaded File'
         return self["value_%s" % self.answer_type]
