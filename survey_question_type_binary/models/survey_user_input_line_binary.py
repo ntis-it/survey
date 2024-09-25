@@ -12,6 +12,7 @@ VALID_MIMETYPES = [
     "image/bmp",
     "image/svg+xml",
     "image/x-icon",
+    "application/pdf",
 ]
 
 
