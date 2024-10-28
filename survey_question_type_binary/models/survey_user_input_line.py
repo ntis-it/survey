@@ -65,11 +65,22 @@ class SurveyUserInputLine(models.Model):
                         )
                     )
 
+    # def _compute_display_name(self):
+    #     super()._compute_display_name()
+    #     for line in self:
+    #         if line.answer_type == "binary" and line.answer_binary_ids:
+    #             line.display_name = line.answer_binary_ids.filename
+    #         if line.answer_type == "multi_binary" and line.answer_binary_ids:
+    #             line.display_name = _("%s File(s)") % len(line.answer_binary_ids)
+    #     return True
+
     def _compute_display_name(self):
         super()._compute_display_name()
         for line in self:
             if line.answer_type == "binary" and line.answer_binary_ids:
-                line.display_name = line.answer_binary_ids.filename
-            if line.answer_type == "multi_binary" and line.answer_binary_ids:
+                # Ensure you are accessing only the first record if only one filename is expected
+                line.display_name = line.answer_binary_ids[0].filename if line.answer_binary_ids else ""
+            elif line.answer_type == "multi_binary" and line.answer_binary_ids:
+                # Here, you correctly handle multiple files, so this should work as intended
                 line.display_name = _("%s File(s)") % len(line.answer_binary_ids)
         return True
